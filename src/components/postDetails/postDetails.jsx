@@ -1,7 +1,6 @@
  
 import React, { useState } from "react";
-import style from "./PostDetails.module.css";
-import { useParams } from "react-router-dom";
+ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Comment from "../comment/Comment";

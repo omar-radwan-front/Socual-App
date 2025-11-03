@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
-import style from "./Home.module.css";
-import { useQuery } from "@tanstack/react-query";
+ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Comment from "../comment/Comment";
 import { Link } from "react-router-dom";

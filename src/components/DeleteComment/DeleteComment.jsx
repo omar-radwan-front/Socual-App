@@ -12,8 +12,7 @@ import {
 import axios from "axios";
  import toast from "react-hot-toast";
 import { useQueryClient } from '@tanstack/react-query';
-import style from "./DeleteComment.module.css"
- export default function DeleteComment({id}) {
+  export default function DeleteComment({id}) {
          const [IsLoading, setIsLoading] = useState( false)  
 
     let query=useQueryClient()

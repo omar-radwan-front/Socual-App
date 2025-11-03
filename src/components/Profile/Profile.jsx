@@ -1,8 +1,7 @@
  
 
 import React from "react";
-import style from "./Profile.module.css";
-import axios from "axios";
+  import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import UserPost from "../UserPost/UserPost";
 import ChangePassword from "../ChangePassword/ChangePassword";
