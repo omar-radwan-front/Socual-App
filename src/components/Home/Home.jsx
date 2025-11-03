@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import style from "./Home.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Commment from "../commment/commment";
+import Comment from "../comment/Comment";
 import { Link } from "react-router-dom";
 import CreateCommentModel from "../CreateCommentModel/CreateCommentModel";
 import CreatePost from "../CreatePost/CreatePost";
@@ -95,7 +95,7 @@ export default function Home() {
               )}
             </Link>
 
-            <Commment
+            <Comment
               postComment={post.comments[0]}
               idPost={post.id}
               userId={post.user._id}

@@ -4,7 +4,7 @@ import style from "./PostDetails.module.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import Commment from "../commment/commment";
+import Comment from "../comment/Comment";
 
 export default function PostDetails() {
   const [Show, setShow] = useState(false);
@@ -83,7 +83,7 @@ export default function PostDetails() {
         {Show && (
           <div className="mt-4 space-y-2">
             {data?.comments.map((comment) => (
-              <Commment
+              <Comment
                 key={comment._id}
                 postComment={comment}
                 userId={data?.user.id}

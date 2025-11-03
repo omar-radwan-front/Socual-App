@@ -5,7 +5,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import CreateCommentModel from "../CreateCommentModel/CreateCommentModel";
 import { Link } from "react-router-dom";
-import Commment from "../commment/commment";
+import Commment from "../comment/Comment";
 import UploadPost from "../UploadPost/UploadPost";
 import DeletePost from "../DeletePost/DeletePost";
 

@@ -1,10 +1,9 @@
  
 import React from "react";
-import style from "./Commment.module.css";
-import UpdataComment from "../UpdataComment/UpdataComment";
+ import UpdataComment from "../UpdataComment/UpdataComment";
 import DeleteComment from "../DeleteComment/DeleteComment";
 
-export default function Commment({ postComment, idPost, userId }) {
+export default function Comment({ postComment, idPost, userId }) {
   console.log(postComment);
 
   if (!postComment) {
