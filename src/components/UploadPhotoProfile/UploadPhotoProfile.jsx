@@ -1,25 +1,25 @@
-import React, { useRef, useState } from 'react'
- import { useForm } from 'react-hook-form'
-import axios from 'axios';
+ 
+
+
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import {
   Button,
-  Checkbox,
   Label,
   Modal,
   ModalBody,
   ModalHeader,
-  TextInput
+  TextInput,
 } from "flowbite-react";
-import toast from 'react-hot-toast';
-import style from "./UploadPhotoProfile.module.css"
-import { useQueryClient } from '@tanstack/react-query';
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
- export default function UploadPhotoProfile() {
-  const [IsLoading, setIsLoading] = useState( false)  
+export default function UploadPhotoProfile() {
+  const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const emailInputRef = useRef(null);
-    let query=useQueryClient()
-
+  const query = useQueryClient();
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -28,49 +28,54 @@ import { useQueryClient } from '@tanstack/react-query';
   });
 
   async function onSubmit(data) {
-              setIsLoading(true) 
-
-    console.log("Form Data:", data);
+    setIsLoading(true);
     try {
-      let mydata=new FormData()
-      mydata.append("photo",data.photo[0])
-      let res=await axios.put(`https://linked-posts.routemisr.com/users/upload-photo`,mydata,{
-        headers:{
-          token:localStorage.getItem("userToken")
-        }
-     
-    
-      }) 
-         if (res.data.message === "success") {
-          setIsLoading(false) 
-           console.log(res);
-         toast.success("Change success")
-           await query.invalidateQueries({ queryKey: ["profile"], exact: true });
-          await query.invalidateQueries({ queryKey: ["home"], exact: true });
-              await  query.invalidateQueries({queryKey:[`getComment`], exact:true});
-              await  query.invalidateQueries({queryKey:[`userPost`], exact:true});
-              await  query.invalidateQueries({queryKey:[`ChengProfilePh`], exact:true});
-          }
- 
-    
- 
+      const formData = new FormData();
+      formData.append("photo", data.photo[0]);
 
-        //  }
+      const res = await axios.put(
+        `https://linked-posts.routemisr.com/users/upload-photo`,
+        formData,
+        {
+          headers: {
+            token: localStorage.getItem("userToken"),
+          },
+        }
+      );
+
+      if (res.data.message === "success") {
+        toast.success("Profile photo updated successfully 🎉");
+        await Promise.all([
+          query.invalidateQueries({ queryKey: ["profile"], exact: true }),
+          query.invalidateQueries({ queryKey: ["home"], exact: true }),
+          query.invalidateQueries({ queryKey: ["getComment"], exact: true }),
+          query.invalidateQueries({ queryKey: ["userPost"], exact: true }),
+          query.invalidateQueries({ queryKey: ["ChengProfilePh"], exact: true }),
+        ]);
+      }
     } catch (error) {
       console.log(error);
-       toast.error("Change error")
-         setIsLoading(false) 
-    }
-      finally {
+      toast.error("Failed to upload photo ❌");
+    } finally {
       setIsLoading(false);
-      reset(); // تفضي الفورم
-      setOpenModal(false); // تقفل المودال
+      reset();
+      setOpenModal(false);
     }
-  };
+  }
 
   return (
     <>
-      <Button className=" my-2 w-[100%] md:w-fit" onClick={() => setOpenModal(true)}>UploadProfilePhoto</Button>
+      <Button
+        onClick={() => setOpenModal(true)}
+        className="my-2 w-full md:w-fit px-5 py-2.5 
+                   bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 
+                   hover:from-green-600 hover:to-teal-700 
+                   text-white font-semibold rounded-xl 
+                   shadow-md hover:shadow-lg 
+                   transition-all duration-300"
+      >
+        Upload Profile Photo
+      </Button>
 
       <Modal
         show={openModal}
@@ -78,34 +83,54 @@ import { useQueryClient } from '@tanstack/react-query';
         popup
         onClose={() => setOpenModal(false)}
         initialFocus={emailInputRef}
+        className="backdrop-blur-md"
       >
-        <ModalHeader />
-        <ModalBody>
-         
+        <ModalHeader className="bg-gray-100 dark:bg-gray-800 rounded-t-2xl" />
+        <ModalBody className="bg-white dark:bg-gray-900 rounded-b-2xl p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-             UploadPhotoProfile
-
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
+              Upload Profile Photo
             </h3>
 
-           
             <div>
-              <div className="mb-2 block ">
-                <Label htmlFor="photo" className='flex justify-center items-center bg-amber-700 p-5 cursor-pointer'><i className='fa-solid fa-image fa-2xl'></i></Label>
+              <div className="mb-2 block text-center">
+                <Label
+                  htmlFor="photo"
+                  className="flex justify-center items-center 
+                             bg-gradient-to-r from-amber-500 to-orange-600 
+                             hover:from-amber-600 hover:to-orange-700 
+                             text-white py-4 rounded-xl 
+                             cursor-pointer transition-all duration-300 shadow-md"
+                >
+                  <i className="fa-solid fa-image fa-xl mr-2"></i>
+                  Choose Image
+                </Label>
               </div>
-              <TextInput className='hidden'
+
+              <TextInput
                 id="photo"
                 type="file"
-                {...register('photo')}
-             
-               />
+                {...register("photo")}
+                className="hidden"
+              />
             </div>
- 
 
-        
-            <div className="w-full">
-                <Button  disabled={IsLoading}
-               type="submit" className='md:w-1/4 mt-2'> {IsLoading?<i className="fas fa-spinner fa-spin text-white"></i>:"submit"}</Button>
+            <div className="flex justify-center">
+              <Button
+                disabled={isLoading}
+                type="submit"
+                className="mt-2 px-8 py-2 rounded-xl 
+                           bg-gradient-to-r from-green-500 to-teal-600 
+                           hover:from-green-600 hover:to-teal-700 
+                           text-white font-semibold 
+                           transition-all duration-300"
+              >
+                {isLoading ? (
+                  <i className="fas fa-spinner fa-spin text-white"></i>
+                ) : (
+                  "Submit"
+                )}
+              </Button>
             </div>
           </form>
         </ModalBody>

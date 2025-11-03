@@ -23,7 +23,7 @@ import PostDetails from './components/postDetails/postDetails';
       {path : "profile" ,element: <ProtectedRoute><Profile/></ProtectedRoute>},
       {path : "login", element:<Login />},
       {path :"register",element:<Register />},
-      {path : `postdetails/:id`,element : <PostDetails/>},
+      {path : `postdetails/:id`,element :<ProtectedRoute><PostDetails/></ProtectedRoute> },
       {path:"*", element:<NotFaind/>}
     ]
   }

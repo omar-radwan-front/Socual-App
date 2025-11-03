@@ -4,9 +4,8 @@
 
 
 body{
-       /* @apply bg-cover bg-center;
-    background-image: url('src/assets/news-01.png'); */
-    background-color: rgba(0, 0, 0, 0.764);
+  
+    background-color: rgba(184, 182, 182, 0.764);
     
 }
  
