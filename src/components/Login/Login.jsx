@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../Context/UserContext';
 
@@ -88,9 +88,9 @@ export default function Login() {
 
                     <p className="text-center text-gray-700 dark:text-gray-300 mt-6 text-sm">
                         Don’t have an account?{" "}
-                        <a href="/register" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+                        <Link to="/register" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
                             Register here
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>
