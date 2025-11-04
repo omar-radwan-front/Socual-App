@@ -96,9 +96,9 @@ export function MyNavbar() {
               text-white font-semibold rounded-xl shadow-md 
               hover:shadow-lg hover:brightness-110 active:scale-95 
               focus:ring-4 focus:ring-sky-300 dark:focus:ring-sky-700 
-              w-[80px] md:w-[100px] transition-all duration-200"
+              w-[60px] md:w-[100px] transition-all duration-200"
             >
-              <Link to="login" className="w-full block text-center">
+              <Link to="login" className=" block text-center ">
                 Login
               </Link>
             </Button>
@@ -109,9 +109,9 @@ export function MyNavbar() {
               text-white font-semibold rounded-xl shadow-md 
               hover:shadow-lg hover:brightness-110 active:scale-95 
               focus:ring-4 focus:ring-emerald-300 dark:focus:ring-emerald-700 
-              w-[100px] md:w-[110px] transition-all duration-200"
+              w-[80px] md:w-[110px] transition-all duration-200"
             >
-              <Link to="register" className="w-full block text-center">
+              <Link to="register" className=" block text-center">
                 Register
               </Link>
             </Button>
